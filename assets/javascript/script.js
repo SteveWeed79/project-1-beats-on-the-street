@@ -15,20 +15,14 @@ async function getCityData() {
         .then((response) => response.json())
         .then((data) => (data));
 
-
-
-
-
-
-
-
     var venueName = eventData.events[0].venue.name;
     var eventName = eventData.events[0].short_title;
+    var eventAddress = eventData.events[0].venue.address + " " + eventData.events[0].venue.extended_address;
+    var eventDate = eventData.events[0].datatime_utc;
+    var eventTime = eventData.events[0].datatime_local;
     var eventUrl = eventData.events[0].url;
-    console.log(eventUrl);
-
-
-
+    var eventImg = eventData.events[0].performers[0].image;
+    console.log(eventAddress);
 };
 
 
