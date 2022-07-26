@@ -1,0 +1,38 @@
+body {
+  background-color: white;
+}
+header {
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  background-color: black;
+  color: white;
+  margin-bottom: 5px;
+}
+
+header h1 {
+  font-size: 50px;
+}
+
+#search {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 25%;
+  background-color: blue;
+  color: white;
+}
+
+#search-history li {
+  list-style: none;
+  text-align: center;
+}
+
+#shows {
+  display: flex;
+  flex-flow: column wrap;
+  color: white;
+  background-color: black;
+  margin-left: 5px;
+  width: 50%;
+}
