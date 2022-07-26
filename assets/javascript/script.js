@@ -27,4 +27,6 @@ async function getCityData() {
 
 
 
+
+
 getCityData(typedLocation);
