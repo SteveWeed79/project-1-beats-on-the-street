@@ -1,3 +1,8 @@
+
+var youtubeAPIKey = "AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs";
+
+GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&key=AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs HTTP/1.1
+
 var eventData
 var data;
 var typedLocation = "detroit";
@@ -10,10 +15,12 @@ var typedCityField = document.getElementById("btn-search").addEventListener("cli
     event.preventDefault()
 });
 
+
 async function getCityData() {
     var eventData = await fetch(seatGeekApi)
         .then((response) => response.json())
         .then((data) => (data));
+
 
     var venueName = eventData.events[0].venue.name;
     var eventName = eventData.events[0].short_title;
@@ -28,3 +35,4 @@ async function getCityData() {
 
 
 getCityData(typedLocation);
+

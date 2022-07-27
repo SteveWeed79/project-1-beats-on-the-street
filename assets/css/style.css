@@ -40,11 +40,14 @@ main {
   text-align: center;
 }
 
-/* #player {} */
+#shows {
+  display: flex;
+  flex-flow: column wrap;
+  color: white;
+  background-color: black;
+  margin-left: 5px;
+  width: 50%;
+}
 
-/* #music {
-  flex-grow: 3;
-  margin: 10px;
-  background-color: turquoise;
-  height: 50%;
-} */
+/* styling for youtube video */
+
