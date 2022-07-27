@@ -1,15 +1,5 @@
-var bandAPI = ("rest.bandsintown.com?");
-var apiKey = ("");
-var bandName = ("");
-var venuneName = ("");
-var eventDate = ("");
+var youtubeAPIKey = "AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs";
+
+GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&key=AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs HTTP/1.1
 
 
-
-
-
-function bandInfo() {
-    fetch(bandAPI)
-        .then(response => response.json())
-        .then(data => console.log(data));
-}
