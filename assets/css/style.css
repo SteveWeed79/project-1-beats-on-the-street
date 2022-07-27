@@ -42,9 +42,16 @@ main {
 
 /* #player {} */
 
-/* #music {
-  flex-grow: 3;
-  margin: 10px;
-  background-color: turquoise;
-  height: 50%;
-} */
+#music {
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 5px;
+}
+
+.card {
+  background-color: darkgreen;
+  color: white;
+  border: medium solid brown;
+  border-radius: 5px;
+  margin: 5px;
+}
