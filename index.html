@@ -9,6 +9,7 @@
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <!-- <link rel="stylesheet" href="./assets/css/reset.css" /> -->
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
@@ -64,21 +65,17 @@
         <ul id="search-history">
           <!-- one list item temporarily inserted only for assistance in styling -->
           <li>Portland</li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li>KC</li>
+          <li>Denver</li>
+          <li>Eureka Springs</li>
+          <li>Wichita</li>
         </ul>
+
+        <!-- The <iframe> (and video player) will replace this <div> tag. -->
+        <div id="player"></div>
       </section>
-      <!-- Section #music displays search results and video-->
-      <section id="music">
-        <!-- div .shows displays only the current shows in town -->
-        <div class="shows">
-          <!-- data from TicketMaster -->
-        </div>
-        <!-- div .video is where the youTube player goes -->
-        <div class="video"></div>
-      </section>
+      <!-- Section #music displays cards of who's playing-->
+      <section id="music"></section>
     </main>
     <script type="text/javascript" src="./assets/javascript/script.js"></script>
   </body>
