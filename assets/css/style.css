@@ -1,6 +1,7 @@
 html {
   height: 100%;
 }
+
 body {
   background-color: turquoise;
   height: 100%;
@@ -48,3 +49,9 @@ main {
   background-color: turquoise;
   height: 50%;
 } */
+
+
+.borders {
+  border: 3px solid red;
+  margin: 5px;
+}

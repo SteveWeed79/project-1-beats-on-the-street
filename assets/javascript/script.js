@@ -1,47 +1,76 @@
-var eventData;
+const apiUrl = "https://api.seatgeek.com/2/events?venue.city=";
+const apiKey = "&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2";
 var data;
 var typedLocation;
-var apiUrl = "https://api.seatgeek.com/2/events?venue.city=";
-var apiKey = "&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2";
 var seatGeekApi;
+
+var savedCities = JSON.parse(localStorage.getItem("savedCitiesBand")) || [];
+
 // ^^^ TWO NAME CITIES NEED A HYPHEN like new york is New-York or Kansas-City ^^^^
-var typedCityField = document.getElementById("btn-search").addEventListener("click", function (event) {
+let eventData;
+
+var events = [];
+
+document.getElementById("btn-search").addEventListener("click", async function (event) {
     event.preventDefault()
     typedLocation = document.getElementById("typed-location").value;
+    savedCities.push(typedLocation);
+    localStorage.setItem("savedCitiesBand", JSON.stringify(savedCities));
     typedLocation = typedLocation.replace(/\s/i, "-");
-    getCityData()
+    await getCityData();
+    displayEventData();
+
+
 });
 
 
 async function getCityData() {
     if (typedLocation != "") {
         seatGeekApi = apiUrl + typedLocation + apiKey;
-        var eventData = await fetch(seatGeekApi)
+        var response = await fetch(seatGeekApi)
             .then((response) => response.json());
-        var venueName = eventData.events[0].venue.name;
-        var eventName = eventData.events[0].short_title;
-        var eventAddress = eventData.events[0].venue.address + " " + eventData.events[0].venue.extended_address;
-        var eventDate = eventData.events[0].datatime_utc;
-        var eventTime = eventData.events[0].datatime_local;
-        var eventUrl = eventData.events[0].url;
-        var eventImg = eventData.events[0].performers[0].image;
-        console.log(eventImg)
-    }
+        events = [];
+        for (i = 0; i < response.events.length; i++) {
+            var venueName = response.events[i].venue.name;
+            var eventName = response.events[i].short_title;
+            var eventAddress = response.events[i].venue.address + response.events[i].venue.extended_address;
+            var eventDate = response.events[i].datetime_utc;
+            var eventTime = response.events[i].datetime_local;
+            var eventUrl = response.events[i].url;
+            var eventImg = response.events[i].performers[0].image;
+            eventData = {
+                venueName,
+                eventName,
+                eventAddress,
+                eventDate,
+                eventTime,
+                eventUrl,
+                eventImg
+            };
+            events.push(eventData);
 
+        }
+        loadSearches();
+        console.log(events)
+
+
+
+    };
 };
 
 
+// function displayEventData() {
+//     getCityData()
+//     console.log(eventData.eventName)
+// }
+
+
+
+
 function displayEventData() {
-    getCityData()
-}
-
-
-
-
-function displayEventData(eventInfo) {
     var number = 0;
-    var htmlEvents = document.querySelectorAll("[event]")
-    eventInfo.forEach(event => {
+    var htmlEvents = document.querySelectorAll("[data-event]")
+    events.forEach(event => {
         var htmlEvent = htmlEvents[number++];
         if (htmlEvent != undefined) {
             var eventTitle = htmlEvent.querySelector(".event-name");
@@ -50,20 +79,37 @@ function displayEventData(eventInfo) {
             var dateTitle = htmlEvent.querySelector(".event-date");
             var urlTitle = htmlEvent.querySelector(".event-url");
             var imgTitle = htmlEvent.querySelector(".event-img");
+            var eventTime = htmlEvent.querySelector(".event-time")
             eventTitle.innerHTML = event.eventName;
-            venueTitle.innerHTML = event.eventName;
-            addressTitle.innerHTML = event.eventName;
-            dateTitle.innerHTML = event.eventName;
-            urlTitle.innerHTML = event.eventName;
-            imgTitle.innerHTML = event.eventName;
-
-
-
+            venueTitle.innerHTML = event.venueName;
+            addressTitle.innerHTML = event.eventAddress;
+            eventTime.innerHTML = event.eventTime;
+            dateTitle.innerHTML = event.eventDate;
+            urlTitle.href = event.eventUrl;
+            imgTitle.src = event.eventImg;
         }
     });
 };
 
+function loadSearches() {
+    var ul = document.getElementById("previous-searches");
+    ul.innerHTML = ""
+    savedCities.forEach(city => {
+        var li = document.createElement("li");
+        var text = document.createTextNode(city)
+        li.appendChild(text);
+        ul.appendChild(li);
+        li.addEventListener("click", event => clickPreviousSearch(event))
+    });
+};
 
-function getEventsFromCityName(typedLocation) {
+async function clickPreviousSearch(event) {
+    typedLocation = event.target.innerHTML;
+    typedLocation = typedLocation.replace(/\s/i, "-");
+    await getCityData();
+    displayEventData();
+};
 
-}
+
+
+loadSearches();
