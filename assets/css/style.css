@@ -2,8 +2,10 @@ html {
   height: 100%;
 }
 body {
-  background-color: turquoise;
+  background-color: rgb(55, 226, 213);
   height: 100%;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 header {
@@ -13,8 +15,8 @@ header {
   align-items: center;
   width: 100%;
   height: 100px;
-  background-color: brown;
-  color: white;
+  background-color: rgb(89, 6, 150);
+  color: rgb(251, 203, 10);
   margin: 5px;
 }
 
@@ -30,8 +32,8 @@ main {
 #city-search {
   height: 100%;
   flex-direction: column;
-  background-color: orange;
-  color: blue;
+  background-color: rgb(251, 203, 10);
+  color: rgb(199, 10, 128);
   margin: 10px;
 }
 
@@ -40,18 +42,26 @@ main {
   text-align: center;
 }
 
-/* #player {} */
+/* styling for youtube video */
 
 #music {
+  align-items: center;
+}
+
+.card-container {
   flex-wrap: wrap;
-  flex-direction: row;
-  margin: 5px;
+  justify-content: center;
+}
+
+.row {
+  height: 100%;
+  justify-content: space-evenly;
+  padding-right: 20px;
 }
 
 .card {
-  background-color: darkgreen;
-  color: white;
-  border: medium solid brown;
+  background-color: rgb(199, 10, 128);
+  color: rgb(55, 226, 213);
+  border: medium solid rgb(251, 203, 10);
   border-radius: 5px;
-  margin: 5px;
 }
