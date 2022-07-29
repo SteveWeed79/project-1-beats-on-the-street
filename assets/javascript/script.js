@@ -55,9 +55,9 @@ var typedLocation = "detroit";
 var apiUrl = "https://api.seatgeek.com/2/events?venue.city=";
 var apiKey = "&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2"
 var seatGeekApi = apiUrl + typedLocation + apiKey;
-var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city=Dallas"
-var cityNameEL;
-var ticketMasterList;
+var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city="
+var cityNameTicketsmaster;
+var ticketMasterList = [];
 
 
 // ^^^ TWO NAME CITIES NEED A HYPHEN like new york is New-York or Kansas-City ^^^^
@@ -171,18 +171,17 @@ async function clickPreviousSearch(event) {
 };
 
 function getTicketmaster() {
-    fetch(ticketMaster)
+    fetch(ticketMaster + typedLocation)
         .then(response => response.json())
         .then(data => {
             console.log(data)
             ticketMasterList = data;
             console.log(ticketMasterList)
-            cityNameEL = ticketMaster._embedded[0].events[0].name
-            console.log(cityNameEL)
-        })
-    
-        
-}
+            cityNameTickets = ticketMasterList._embedded.events[0].name
+            console.log(cityNameTickets)
+        })   
+};
+
 
 
 
