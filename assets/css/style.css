@@ -3,6 +3,18 @@ html {
 }
 
 body {
+
+  background: #ddd;
+}
+
+.profile-area {
+  padding: 80px 0;
+}
+
+.card {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 15px;
   background-color: turquoise;
   height: 100%;
 }
@@ -17,11 +29,28 @@ header {
   background-color: brown;
   color: white;
   margin: 5px;
+
 }
 
-header h1 {
-  font-size: 50px;
+.img1 img {
+  height: 200px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  width: 100%;
 }
+
+
+.img2 img {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 7px solid #fff;
+  margin-top: 80px;
 
 main {
   display: flex;
@@ -34,14 +63,47 @@ main {
   background-color: orange;
   color: blue;
   margin: 10px;
+
 }
 
-#search-history li {
-  list-style: none;
+.card:hover .img2 img {
+  border-color: darkcyan;
+  transition: 0.7s;
+}
+
+.main-text {
+  padding: 30px;
   text-align: center;
 }
 
-/* #player {} */
+.main-text h2 {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 20px;
+  margin: 0 0 20px;
+}
+
+
+.main-text p {
+  font-size: 16px;
+  padding: 0 35px;
+}
+
+.socials {
+  text-align: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.socials i {
+  font-size: 20px;
+  color: darkcyan;
+  padding: 0 10px;
+}
+
+/* styling for youtube video */
+
+
 
 /* #music {
   flex-grow: 3;
@@ -55,3 +117,4 @@ main {
   border: 3px solid red;
   margin: 5px;
 }
+
