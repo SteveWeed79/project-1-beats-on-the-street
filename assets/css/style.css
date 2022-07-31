@@ -53,42 +53,43 @@ header {
   border: 7px solid #fff;
   margin-top: 80px;
 
-main {
-  display: flex;
-  height: 100%;
-}
+  main {
+    display: flex;
+    height: 100%;
+  }
 
-#city-search {
-  height: 100%;
-  flex-direction: column;
-  background-color: orange;
-  color: blue;
-  margin: 10px;
+  #city-search {
+    height: 100%;
+    flex-direction: column;
+    background-color: orange;
+    color: blue;
+    margin: 10px;
 
-}
+  }
 
-.card:hover .img2 img {
-  border-color: darkcyan;
-  transition: 0.7s;
-}
+  .card:hover .img2 img {
+    border-color: darkcyan;
+    transition: 0.7s;
+  }
 
-.main-text {
-  padding: 30px;
-  text-align: center;
-}
+  .main-text {
+    padding: 30px;
+    text-align: center;
+  }
 
-.main-text h2 {
-  text-transform: uppercase;
-  font-weight: 900;
-  font-size: 20px;
-  margin: 0 0 20px;
-}
+  .main-text h2 {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 20px;
+    margin: 0 0 20px;
+  }
 
 
-.main-text p {
-  font-size: 16px;
-  padding: 0 35px;
-}
+  .main-text p {
+    font-size: 16px;
+    padding: 0 35px;
+  }
+
 
 /* modal background */
 
@@ -116,11 +117,12 @@ main {
   width: 40%;
 }
 
-/* styling for youtube video */
+
+  /* styling for youtube video */
 
 
 
-/* #music {
+  /* #music {
   flex-grow: 3;
   margin: 10px;
   background-color: turquoise;
@@ -128,8 +130,11 @@ main {
 } */
 
 
-.borders {
-  border: 3px solid red;
-  margin: 5px;
-}
+  .borders {
+    border: 3px solid red;
+    margin: 5px;
+  }
 
+  li:nth-of-type(1n+5) {
+    display: none;
+  }
