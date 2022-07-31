@@ -36,7 +36,7 @@ async function searchYouTube(artistName) {
             </div>
             <div class="main-text place-content-center">
               <h2>${body.items[0].snippet.channelTitle}</h2>
-              <iframe width="420" height="345" src="https://www.youtube.com/embed/${items.id.videoId}">
+              <iframe width="420" height="345" src="https://www.youtube.com/embed/${body.items[0].id.videoId}">
             </div>`;
 }
 
