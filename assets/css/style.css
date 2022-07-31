@@ -16,6 +16,7 @@ body {
   border-radius: 15px;
   background-color: turquoise;
   height: 100%;
+  width: 400px;
 }
 
 header {
@@ -32,12 +33,13 @@ header {
 
 .img1 img {
   height: 200px;
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
+  border-radius: 15px;
   width: 100%;
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
-may not need this styling .img2 img {
+.img2 img {
   position: relative;
   display: block;
   margin-left: auto;

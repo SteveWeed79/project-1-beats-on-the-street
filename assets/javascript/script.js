@@ -26,7 +26,7 @@ window.onclick = function (event) {
 // Helper function to create youtube content in the cards, takes an artist name and appends the search results
 // To the artist name div
 async function searchYouTube(artistName) {
-  const youtubeSrch = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs&q=${artistName}`;
+  const youtubeSrch = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCAdTFXDxOuijbNr0DKHrmmCyqGYP5t-2Q&q=${artistName}`;
   const response = await fetch(youtubeSrch);
   const body = await response.json();
 
@@ -34,9 +34,9 @@ async function searchYouTube(artistName) {
             <div class="img1">
               <img src="${body.items[0].snippet.thumbnails.medium.url}" alt="thumbnail-1" />
             </div>
-            <div class="main-text place-content-center">
+            <div class="main-text place-content-center embed-responsive embed-responsive-16by9">
               <h2>${body.items[0].snippet.channelTitle}</h2>
-              <iframe width="420" height="345" src="https://www.youtube.com/embed/${body.items[0].id.videoId}">
+              <iframe width="250" height="345" src="https://www.youtube.com/embed/${body.items[0].id.videoId}">
             </div>`;
 }
 
@@ -48,7 +48,7 @@ async function searchGeekApi(searchTerm) {
   const body = await response.json();
   body.events.map((event) => {
     document.getElementById("music-event").innerHTML += `
-    <div class="card p-6">
+    <div class="card p-6 col-md-6">
     <div class="card-body">
     <h5 class="card-title">${event.short_title}</h5>
     <h6 class="card-subtitle mb-2 text-muted">${event.venue.name}</h6>
