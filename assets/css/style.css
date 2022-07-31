@@ -3,6 +3,7 @@ html {
 }
 
 body {
+
   background: #ddd;
 }
 
@@ -28,6 +29,7 @@ header {
   background-color: brown;
   color: white;
   margin: 5px;
+
 }
 
 .img1 img {
@@ -37,7 +39,9 @@ header {
   width: 100%;
 }
 
-may not need this styling .img2 img {
+
+
+.img2 img {
   position: relative;
   display: block;
   margin-left: auto;
@@ -48,6 +52,19 @@ may not need this styling .img2 img {
   border-radius: 50%;
   border: 7px solid #fff;
   margin-top: 80px;
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+#city-search {
+  height: 100%;
+  flex-direction: column;
+  background-color: orange;
+  color: blue;
+  margin: 10px;
+
 }
 
 .card:hover .img2 img {
@@ -66,6 +83,7 @@ may not need this styling .img2 img {
   font-size: 20px;
   margin: 0 0 20px;
 }
+
 
 .main-text p {
   font-size: 16px;
@@ -97,3 +115,21 @@ may not need this styling .img2 img {
   border: 1px solid #888;
   width: 40%;
 }
+
+/* styling for youtube video */
+
+
+
+/* #music {
+  flex-grow: 3;
+  margin: 10px;
+  background-color: turquoise;
+  height: 50%;
+} */
+
+
+.borders {
+  border: 3px solid red;
+  margin: 5px;
+}
+
