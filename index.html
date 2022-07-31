@@ -37,10 +37,18 @@
 <body>
 
     <header>
+
+      <h2>Beats on<br />the Street</h2>
+      <h1>
+        <!--Location temporarily added for styling purposes. Should be set to display the name of whatever city the user is searching.-->
+        Who's Playing Tonight in <span id="city-name"><span>
+      </h1>
+
         <h1>
             Live Music in
             <!-- location -->
         </h1>
+
     </header>
     <main>
         <!-- Section #city-search is the left sidebar -->
@@ -67,6 +75,16 @@
                 </div>
             </div>
 
+
+        <!-- #search-history list  -->
+        <ul id="search-history">
+          <!-- list items temporarily inserted only for assistance in styling -->
+          
+        </ul>
+      </section>
+      <!-- Section #music displays search results and video-->
+      <section id="music"></section>
+
             <ul id="previous-searches">
                 <!-- list items temporarily inserted only for assistance in styling -->
                 <!-- #search-history list  -->
@@ -74,18 +92,7 @@
 
             
         </section>
-        <!-- Section #music displays cards of who's playing-->
-        <section id="music">
-            <div class="borders" data-event="1">
-                <p>Event Name: <span class="event-name"></span></p>
-                <p>Venue Name: <span class="venue-name"></span></p>
-                <p>Event Address <span class="event-address"></span></p>
-                <p>Event Date: <span class="event-date"></span></p>-->
-                <p>Event Url: <a class="event-url" href="" target="_blank">LINK TO EVENT ON SEAT GEEK</a></p>
-                <p>Event Image: <img class="event-img" src=""></p>
-                <p>Event Time: <span class="event-time"></span></p>
-            </div>
-        </section>
+       
 
 
     
@@ -98,73 +105,9 @@
         <section class="youtube-video-container float-right p-8">
 
 
-            <nav class="navbar navbar-dark bg-dark">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchBtn">
-                        Search
-                    </button>
-                </form>
-            </nav>
+            
 
-            <div class="profile-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="img1"><img src="#" alt="thumbnail-1" /></div>
-                                <div class="img2"><img src="#" alt="thumbnail-2" /></div>
-                                <div class="main-text">
-                                    <h2>Artist One</h2>
-                                    <p class="youtube-video">Place Youtube video here</p>
-                                </div>
-                                <div class="socials">
-                                    <i class="bi bi-facebook"></i>
-                                    <i class="bi bi-linkedin"></i>
-                                    <i class="bi bi-youtube"></i>
-                                    <i class="bi bi-twitter"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- artist card #2 -->
-
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="img1"><img src="#" alt="thumbnail-1" /></div>
-                                <div class="img2"><img src="#" alt="thumbnail-2" /></div>
-                                <div class="main-text">
-                                    <h2>Artist One</h2>
-                                    <p class="youtube-video">Place Youtube video here</p>
-                                </div>
-                                <div class="socials">
-                                    <i class="bi bi-facebook"></i>
-                                    <i class="bi bi-linkedin"></i>
-                                    <i class="bi bi-youtube"></i>
-                                    <i class="bi bi-twitter"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- artist card #3 -->
-
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="img1"><img src="#" alt="thumbnail-1" /></div>
-                                <div class="img2"><img src="#" alt="thumbnail-2" /></div>
-                                <div class="main-text">
-                                    <h2>Artist One</h2>
-                                    <p class="youtube-video">Place Youtube video here</p>
-                                </div>
-                                <div class="socials">
-                                    <i class="bi bi-facebook"></i>
-                                    <i class="bi bi-linkedin"></i>
-                                    <i class="bi bi-youtube"></i>
-                                    <i class="bi bi-twitter"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
 
 
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -195,28 +138,7 @@
 
 
   
-    <header>Beats in the Streets</header>
-    <!-- search bar -->
-
-    <nav class="navbar navbar-dark bg-dark">
-      <form class="form-inline">
-        <input
-          class="form-control mr-sm-2"
-          type="text"
-          placeholder="Search"
-          aria-label="Search"
-          id="searchInput"
-        />
-        <button
-          class="btn btn-outline-success my-2 my-sm-0"
-          id="searchBtn"
-          type="submit"
-        >
-          Search
-        </button>
-      </form>
-    </nav>
-    <main>
+    
       <!-- Event Section -->
       <div id="music-event" class="col-md-6 p-5 flex space-x-4"></div>
 
@@ -259,10 +181,11 @@
       <!-- Section #music displays cards of who's playing-->
       <section id="music"></section>
 
+
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="./assets/javascript/script.js"></script>
 
-</body>
-
+  </body>
 </html>
+
