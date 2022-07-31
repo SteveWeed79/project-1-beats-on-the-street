@@ -1,6 +1,12 @@
+
 @media screen and (max-width: 667px) {
   header h2 {
   }
   header h1 {
+
+@media screen and (max-width: 360px) {
+  #city-search {
+    max-width: 100px;
+
   }
 }
