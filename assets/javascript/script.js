@@ -97,6 +97,9 @@ async function searchGeekApi(searchTerm) {
     );
 };
 
+
+
+
 async function getCityData() {
     if (typedLocation != "") {
         seatGeekApi = apiUrl + typedLocation + apiKey;
@@ -157,7 +160,6 @@ function displayEventData() {
 function loadSearches() {
     var ul = document.getElementById("previous-searches");
     ul.innerHTML = "";
-
     savedCities.forEach(city => {
         var li = document.createElement("li");
         var text = document.createTextNode(city);
