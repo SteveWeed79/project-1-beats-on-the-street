@@ -8,6 +8,8 @@ On this project we learned how to collaborate, use multiple APIs at the same tim
 
 ##Usage
 https://steveweed79.github.io/project-1-beats-on-the-street/
+<img width="958" alt="Screenshot 2022-07-31 170244" src="https://user-images.githubusercontent.com/106550809/182284184-2135e358-ef7d-4be4-8b04-ddf7736e5a73.png">
+
 
 ##Collaborators:
 --Sevrin Eldred
