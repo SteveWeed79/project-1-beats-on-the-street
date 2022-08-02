@@ -16,7 +16,6 @@ var ticketMasterList = [];
 var ticketMax;
 var ticketMin;
 var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city="
-//  THIS IS THE IMPORTANT ONE
 var ticketRange;
 var correctFormat;
 
@@ -28,12 +27,8 @@ document.getElementById("searchBtn").addEventListener("click", async function (e
     savedCities = savedCities.slice(0, 5);
     localStorage.setItem("savedCitiesBand", JSON.stringify(savedCities));
     await getCityData();   
-    // getTicketData();
-    // typedLocation = typedLocation.replace(/\s/i, "-"); 0
     displayEventData();
     console.log(savedCities);
-
-
 });
 
 searchButton.addEventListener("click", function (event) {
@@ -101,11 +96,6 @@ async function searchGeekApi(searchTerm) {
         e.performers.forEach((p) => searchYouTube(p.name))
     );
 };
-
-// ^^^ TWO NAME CITIES NEED A HYPHEN like new york is New-York or Kansas-City ^^^^
-//var typedCityField = document.getElementById("btn-search").addEventListener("click", function (event) {
-// event.preventDefault()
-//});
 
 async function getCityData() {
     if (typedLocation != "") {
@@ -200,26 +190,4 @@ function getTicketmaster() {
         })
 };
 
-
-
-
-
-
 loadSearches();
-
-
-    // function getTicketData() {
-    //     fetch(ticketMaster + typedLocation)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             ticketMasterList = data;
-    //             console.log(ticketMasterList)
-    //             ticketMax = ticketMasterList._embedded.events[0].priceRanges[0].max
-    //             ticketMin = ticketMasterList._embedded.events[0].priceRanges[0].min
-    //             ticketRange = 'Ticket Prices From $' + ticketMax + '0 to $' + ticketMin + '0'
-    //         });
-
-
-    // };
-
