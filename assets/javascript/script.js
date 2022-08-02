@@ -1,9 +1,6 @@
-//Script.js
 const searchButton = document.getElementById("searchBtn");
 const input = document.getElementById("searchInput");
 const modal = document.getElementById("myModal");
-
-// Add the event listner for click events on the search box
 const apiUrl = "https://api.seatgeek.com/2/events?venue.city=";
 const apiKey = "&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2";
 var seatGeekApi = apiUrl + typedLocation + apiKey;
@@ -12,10 +9,9 @@ var savedCities = JSON.parse(localStorage.getItem("savedCitiesBand")) || [];
 let eventData;
 var events = [];
 var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city="
-var ticketMasterList = [];
 var ticketMax;
 var ticketMin;
-var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city="
+var ticketData = [];
 var ticketRange;
 var correctFormat;
 
@@ -75,7 +71,9 @@ async function searchGeekApi(searchTerm) {
     const seatGeekApi = `https://api.seatgeek.com/2/events?venue.city=${searchTerm}&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2`;
     const response = await fetch(seatGeekApi);
     const body = await response.json();
-    body.events.map((event) => {
+    body.events.map(async(event) => {
+        const ticketPrice = await getTicketData(event.short_title)
+        console.log(ticketPrice)
         document.getElementById("music-event").innerHTML += `
     <div class="card p-6 col-6">
     <div class="card-body">
@@ -85,6 +83,7 @@ async function searchGeekApi(searchTerm) {
     <h6 class="card-subtitle mb-2 text-muted"></h6>
     <h6>Event Address: <span class="event-address">${event.venue.address}</span></h6>
     <h6>Event Time: <span class="event-time">${correctFormat}</span></h6>
+    <h6>Event Prices: From $ ${ticketPrice._embedded.events[0].priceRanges[0].min} to $ ${ticketPrice._embedded.events[0].priceRanges[0].max} </h6>
     ${event.performers
                 .map((performer) => `<div id="youtube-${performer.name}"></div>`)
                 .join("")}
@@ -108,7 +107,7 @@ async function getCityData() {
         events = [];
         for (i = 0; i < response.events.length; i++) {
             var venueName = response.events[i].venue.name;
-            var eventName = response.events[i].short_title;
+            eventName = response.events[i].short_title;
             var eventAddress = response.events[i].venue.address + response.events[i].venue.extended_address;
             var eventDate = response.events[i].datetime_utc;
             var eventTime = response.events[i].datetime_local;
@@ -128,6 +127,7 @@ async function getCityData() {
         correctFormat = moment(eventTime).format("MMMM, Do, YYYY, h:mm A")
         console.log(correctFormat);
         loadSearches();
+        getTicketData();
     };
 };
 
@@ -180,16 +180,10 @@ async function clickPreviousSearch(event) {
     searchGeekApi(typedLocation);
 };
 
-function getTicketmaster() {
-    fetch(ticketMaster + typedLocation)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            ticketMasterList = data;
-            console.log(ticketMasterList)
-            cityNameTickets = ticketMasterList._embedded.events[0].name
-            console.log(cityNameTickets)
-        })
-};
+async function getTicketData(artistName) {
+    const response = await fetch(ticketMaster + typedLocation + '&keyword=' + artistName);
+    const body = await response.json();
+       return body; 
+    };
 
 loadSearches();
