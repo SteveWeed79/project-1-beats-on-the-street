@@ -1,19 +1,13 @@
-
 //Script.js
 const searchButton = document.getElementById("searchBtn");
 const input = document.getElementById("searchInput");
 const modal = document.getElementById("myModal");
 
 // Add the event listner for click events on the search box
-searchButton.addEventListener("click", (event) => {
-  document.getElementById("music-event").innerHTML = "";
-
-
 const apiUrl = "https://api.seatgeek.com/2/events?venue.city=";
 const apiKey = "&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2";
-var data;
+var seatGeekApi = apiUrl + typedLocation + apiKey;
 var typedLocation;
-var seatGeekApi;
 var savedCities = JSON.parse(localStorage.getItem("savedCitiesBand")) || [];
 let eventData;
 var events = [];
@@ -21,121 +15,87 @@ var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elx
 var ticketMasterList = [];
 var ticketMax;
 var ticketMin;
-
-//  THIS IS THE IMPORTANT ONE
+var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city="
 var ticketRange;
+var correctFormat;
 
-
-
-document.getElementById("btn-search").addEventListener("click", async function (event) {
+document.getElementById("searchBtn").addEventListener("click", async function (event) {
     event.preventDefault()
-    typedLocation = document.getElementById("typed-location").value;
+
+    typedLocation = document.getElementById("searchInput").value;
     savedCities.unshift(typedLocation);
     savedCities = savedCities.slice(0, 5);
     localStorage.setItem("savedCitiesBand", JSON.stringify(savedCities));
-    getTicketData();
-    typedLocation = typedLocation.replace(/\s/i, "-"); 0
-    await getCityData();
+    await getCityData();   
     displayEventData();
     console.log(savedCities);
-
-    // loadSearches();
 });
 
-
-
-
-// global variables to use in code
-
-
-var youtubeAPIKey = "AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs";
-
-
-var youtubeAPIKey = "AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs";
-youtubeApiURL = "https://www.googleapis.com/youtube/v3";
-var youtubeSrch =
-  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs";
-var searchInput = document.getElementsByClassName(".form-control");
-var searchBtn = document.getElementById("#searchBtn");
-// Need to add the on click function when the search button is clicked.
-searchBtn.addEventListener("click", function (event) {
-
-  event.preventDefault();
-  if (input.value) {
-    searchGeekApi(input.value);
-    return;
-  }
-  // If nothing is in the box pop the error modal
-  modal.style.display = "block";
-  console.log("search");
+searchButton.addEventListener("click", function (event) {
+    document.getElementById("music-event").innerHTML = "";
+    event.preventDefault();
+    if (input.value) {
+        searchGeekApi(input.value);
+        return;
+    }
+    // If nothing is in the box pop the error modal
+    modal.style.display = "block";
+    console.log("search");
 });
 
 // Add a on click event to close the modal
 window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 };
 
 // Helper function to create youtube content in the cards, takes an artist name and appends the search results
 // To the artist name div
-async function searchYouTube(artistName) {
-  const youtubeSrch = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBW17GJncf3PfULnlRXh0kIrceTtpfHKIs&q=${artistName}`;
-  const response = await fetch(youtubeSrch);
-  const body = await response.json();
 
-  document.getElementById(`youtube-${artistName}`).innerHTML += `
+async function searchYouTube(artistName) {
+    const youtubeSrch = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCAdTFXDxOuijbNr0DKHrmmCyqGYP5t-2Q&q=${artistName}`;
+    const response = await fetch(youtubeSrch);
+    const body = await response.json();
+
+    console.log(artistName)
+    document.getElementById(`youtube-${artistName}`).innerHTML += `
             <div class="img1">
               <img src="${body.items[0].snippet.thumbnails.medium.url}" alt="thumbnail-1" />
             </div>
-            <div class="main-text place-content-center">
+            <div class="main-text embed-responsive embed-responsive-16by9 place-content-center">
               <h2>${body.items[0].snippet.channelTitle}</h2>
-              <iframe width="420" height="345" src="https://www.youtube.com/embed/${body.items[0].id.videoId}">
+              <iframe width="250" height="345" src="https://www.youtube.com/embed/${body.items[0].id.videoId}">
             </div>`;
-}
+};
 
 // Search the Seat Geek API for events by city
 // Calls the youtube method for each artist in each event
 async function searchGeekApi(searchTerm) {
-  const seatGeekApi = `https://api.seatgeek.com/2/events?venue.city=${searchTerm}&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2`;
-  const response = await fetch(seatGeekApi);
-  const body = await response.json();
-  body.events.map((event) => {
-    document.getElementById("music-event").innerHTML += `
-    <div class="card p-6">
+    const seatGeekApi = `https://api.seatgeek.com/2/events?venue.city=${searchTerm}&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2`;
+    const response = await fetch(seatGeekApi);
+    const body = await response.json();
+    body.events.map((event) => {
+        document.getElementById("music-event").innerHTML += `
+    <div class="card p-6 col-6">
     <div class="card-body">
     <h5 class="card-title">${event.short_title}</h5>
     <h6 class="card-subtitle mb-2 text-muted">${event.venue.name}</h6>
+    <h6 class="card-subtitle mb-2 text-muted"></h6>
+    <h6 class="card-subtitle mb-2 text-muted"></h6>
+    <h6>Event Address: <span class="event-address">${event.venue.address}</span></h6>
+    <h6>Event Time: <span class="event-time">${correctFormat}</span></h6>
     ${event.performers
-      .map((performer) => `<div id="youtube-${performer.name}"></div>`)
-      .join("")}
-  </div>
-</div>
-          
+                .map((performer) => `<div id="youtube-${performer.name}"></div>`)
+                .join("")}
+    </div>
+    </div>
       `;
-  });
-
-  body.events.forEach((e) =>
-    e.performers.forEach((p) => searchYouTube(p.name))
-  );
-}
-
-var eventData
-var data;
-var typedLocation;
-var apiUrl = "https://api.seatgeek.com/2/events?venue.city=";
-var apiKey = "&q=music&type=concert&per_page=5&client_id=MjgwNDk1MDJ8MTY1ODc5NDk5My4zMDk5NDA2"
-var seatGeekApi = apiUrl + typedLocation + apiKey;
-var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city="
-var cityNameTicketsmaster;
-var ticketMasterList = [];
-
-
-// ^^^ TWO NAME CITIES NEED A HYPHEN like new york is New-York or Kansas-City ^^^^
-//var typedCityField = document.getElementById("btn-search").addEventListener("click", function (event) {
-   // event.preventDefault()
-//});
-
+    });
+    body.events.forEach((e) =>
+        e.performers.forEach((p) => searchYouTube(p.name))
+    );
+};
 
 
 
@@ -161,15 +121,19 @@ async function getCityData() {
                 eventDate,
                 eventTime,
                 eventUrl,
-                eventImg
+                eventImg,
             };
             events.push(eventData);
         }
+        correctFormat = moment(eventTime).format("MMMM, Do, YYYY, h:mm A")
+        console.log(correctFormat);
         loadSearches();
     };
 };
 
 function displayEventData() {
+    var titleLocation = " in " + typedLocation;
+    document.getElementById("city-name").textContent = titleLocation;
     var number = 0;
     var htmlEvents = document.querySelectorAll("[data-event]")
     events.forEach(event => {
@@ -208,9 +172,12 @@ function loadSearches() {
 
 async function clickPreviousSearch(event) {
     typedLocation = event.target.innerHTML;
-    typedLocation = typedLocation.replace(/\s/i, "-");
+    // typedLocation = typedLocation.replace(/\s/i, "-");
+    document.getElementById("music-event").innerHTML = "";
     await getCityData();
     displayEventData();
+    searchYouTube(typedLocation);
+    searchGeekApi(typedLocation);
 };
 
 function getTicketmaster() {
@@ -225,26 +192,4 @@ function getTicketmaster() {
         })
 };
 
-         
-
-
-
-
 loadSearches();
-
-
-function getTicketData() {
-    fetch(ticketMaster + typedLocation)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            ticketMasterList = data;
-            console.log(ticketMasterList)
-            ticketMax = ticketMasterList._embedded.events[0].priceRanges[0].max
-            ticketMin = ticketMasterList._embedded.events[0].priceRanges[0].min
-            ticketRange = 'Ticket Prices From $' + ticketMax + '0 to $' + ticketMin + '0'
-        });
-
-
-};
-
