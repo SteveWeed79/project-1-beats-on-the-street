@@ -11,9 +11,9 @@ var events = [];
 var ticketMaster = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&classificationName=music&city="
 var ticketMax;
 var ticketMin;
-var ticketRange;
-var eventName;
 var ticketData = [];
+var ticketRange;
+var correctFormat;
 
 document.getElementById("searchBtn").addEventListener("click", async function (event) {
     event.preventDefault()
@@ -22,9 +22,7 @@ document.getElementById("searchBtn").addEventListener("click", async function (e
     savedCities.unshift(typedLocation);
     savedCities = savedCities.slice(0, 5);
     localStorage.setItem("savedCitiesBand", JSON.stringify(savedCities));
-    await getCityData();
-    getTicketData();
-    // typedLocation = typedLocation.replace(/\s/i, "-"); 0
+    await getCityData();   
     displayEventData();
     console.log(savedCities);
 });
@@ -81,8 +79,10 @@ async function searchGeekApi(searchTerm) {
     <div class="card-body">
     <h5 class="card-title">${event.short_title}</h5>
     <h6 class="card-subtitle mb-2 text-muted">${event.venue.name}</h6>
-    <h6>Event Address: <span class="event-address"></span></h6>
-    <h6>Event Time: <span class="event-time"></span></h6>
+    <h6 class="card-subtitle mb-2 text-muted"></h6>
+    <h6 class="card-subtitle mb-2 text-muted"></h6>
+    <h6>Event Address: <span class="event-address">${event.venue.address}</span></h6>
+    <h6>Event Time: <span class="event-time">${correctFormat}</span></h6>
     <h6>Event Prices: From $ ${ticketPrice._embedded.events[0].priceRanges[0].min} to $ ${ticketPrice._embedded.events[0].priceRanges[0].max} </h6>
     ${event.performers
                 .map((performer) => `<div id="youtube-${performer.name}"></div>`)
@@ -91,16 +91,10 @@ async function searchGeekApi(searchTerm) {
     </div>
       `;
     });
-
     body.events.forEach((e) =>
         e.performers.forEach((p) => searchYouTube(p.name))
     );
 };
-
-// ^^^ TWO NAME CITIES NEED A HYPHEN like new york is New-York or Kansas-City ^^^^
-//var typedCityField = document.getElementById("btn-search").addEventListener("click", function (event) {
-// event.preventDefault()
-//});
 
 async function getCityData() {
     if (typedLocation != "") {
@@ -123,10 +117,12 @@ async function getCityData() {
                 eventDate,
                 eventTime,
                 eventUrl,
-                eventImg
+                eventImg,
             };
             events.push(eventData);
         }
+        correctFormat = moment(eventTime).format("MMMM, Do, YYYY, h:mm A")
+        console.log(correctFormat);
         loadSearches();
         getTicketData();
     };
@@ -188,6 +184,4 @@ async function getTicketData(artistName) {
        return body; 
     };
 
-         
-
-    loadSearches();
+loadSearches();
